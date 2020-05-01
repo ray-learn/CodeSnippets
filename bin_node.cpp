@@ -1,16 +1,8 @@
 #include <iostream>
 #include <string>
+#include "bin_node.hpp"
 
 using namespace std;
-
-template<class T>
-class BinNode {
-public:
-	T data;
-	BinNode<T>* parent;
-	BinNode<T>* left_child;
-	BinNode<T>* right_child;
-};
 
 int main() {
 	BinNode<string> bn;
