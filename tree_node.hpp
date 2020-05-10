@@ -12,7 +12,7 @@ private:
 	int capacity;
 	vector<T*> node_array;
 
-	TripleLinearTree(int capacity) :capacity(capacity) {
+	TripleLinearTree(int capacity) :capacity(capacity),total(0) {
 		node_array.reserve(capacity);
 	}
 
@@ -22,6 +22,7 @@ public:
 	}
 	bool AddTreeNode(T* node);
 	bool UpdateTreeNode(T* node, int rank);
+	bool DeleteTreeNode(int rank);
 	T* GetTreeNode(int rank);
 	bool IsEmpty();
 	bool IsRoot(int rank);
@@ -55,6 +56,9 @@ bool TripleLinearTree<T>::IsLeaf(int rank) {
 
 template <typename T>
 int TripleLinearTree<T>::GetHeight(int rank) {
+	if (rank > total) {
+		return -1;
+	}
 	return ceil(float(rank)/3);
 };
 
@@ -75,7 +79,7 @@ T* TripleLinearTree<T>::GetTreeNode(int rank) {
 		return nullptr;
 	}
 	return node_array[rank];
-}
+};
 
 template <typename T>
 bool TripleLinearTree<T>::UpdateTreeNode(T* node, int rank) {
@@ -84,4 +88,19 @@ bool TripleLinearTree<T>::UpdateTreeNode(T* node, int rank) {
 	}
 	node_array[rank] = node;
 	return true; 
-}
+};
+
+template <typename T>
+bool TripleLinearTree<T>::DeleteTreeNode(int rank) {
+	if (rank == (total-1)) {
+		node_array[rank] = nullptr;
+		total -= 1;
+		return true;
+	}
+	for (int i = rank; i < total-1; i++) {
+		node_array[i] = node_array[i+1];
+	}
+	node_array[total-1] = nullptr;
+	total -= 1;
+	return true; 
+};
