@@ -6,20 +6,23 @@ using namespace std;
 
 int main() {
 	int capacity = 10;
-	string root_node = "hello root";
-	string child_node = "hello child";
-	string update_node = "hello update";
+	string root_node = "hello 1";
+	string second_node = "hello 2";
+	string third_node = "hello 3";
+	string forth_node = "hello 4";
+	string five_node = "hello 5";
+	string six_node = "hello 6";
+	string seven_node = "hello 7";
+	string eight_node = "hello 8";
 	TripleLinearTree<string> tree = TripleLinearTree<string>::InitTripleLinearTree(capacity);
-	cout << "IsEmpty: " << tree.IsEmpty() << endl;
-	cout << "IsRoot: " << tree.IsRoot(0) << endl;
-	cout << "GetHeight(10): " << tree.GetHeight(10) << endl;
 	cout << "AddTreeNode(&root_node): " << tree.AddTreeNode(&root_node) << endl;
-	cout << "AddTreeNode(&child_node): " << tree.AddTreeNode(&child_node) << endl;
-	cout << "GetTreeNode(0): " << *tree.GetTreeNode(0) << endl;
-	cout << "UpdateTreeNode: " << tree.UpdateTreeNode(&update_node, 0) << endl;
-	cout << "GetTreeNode(0): " << *tree.GetTreeNode(0) << endl;
-	cout << "GetTreeNode(1): " << *tree.GetTreeNode(1) << endl;
-	cout << "DeleteTreeNode(0): " << tree.DeleteTreeNode(0) << endl;
-	cout << "GetTreeNode(0): " << *tree.GetTreeNode(0) << endl;
+	cout << "AddTreeNode(&second_node): " << tree.AddTreeNode(&second_node) << endl;
+	cout << "AddTreeNode(&third_node): " << tree.AddTreeNode(&third_node) << endl;
+	cout << "AddTreeNode(&forth_node): " << tree.AddTreeNode(&forth_node) << endl;
+	cout << "AddTreeNode(&five_node): " << tree.AddTreeNode(&five_node) << endl;
+	cout << "AddTreeNode(&six_node): " << tree.AddTreeNode(&six_node) << endl;
+	cout << "AddTreeNode(&seven_node): " << tree.AddTreeNode(&seven_node) << endl;
+	cout << "AddTreeNode(&eight_node): " << tree.AddTreeNode(&eight_node) << endl;
+	tree.PreOrderTraverse(); 
 	return 0;
 }

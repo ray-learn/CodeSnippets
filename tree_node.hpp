@@ -1,7 +1,11 @@
 #include <vector>
+#include <stack>
 #include <cmath>
 
+using std::endl;
+using std::cout;
 using std::vector;
+using std::stack;
 using std::ceil;
 
 template<typename T>
@@ -28,6 +32,9 @@ public:
 	bool IsRoot(int rank);
 	bool IsLeaf(int rank);
 	int GetHeight(int rank);
+	void PreOrderTraverse();
+	void InOrderTraverse();
+	void PostOrderTraverse();
 };
 
 template <typename T>
@@ -103,4 +110,27 @@ bool TripleLinearTree<T>::DeleteTreeNode(int rank) {
 	node_array[total-1] = nullptr;
 	total -= 1;
 	return true; 
+};
+
+template <typename T>
+void TripleLinearTree<T>::PreOrderTraverse() {
+	if (total == 0) {
+		return;
+	}
+
+	stack<int> index_stack;
+	index_stack.push(1);
+
+	while (!index_stack.empty()) {
+		int root_rank = index_stack.top();
+		index_stack.pop();
+		cout << "traversing index is: " << root_rank << endl;
+		if ((2 * root_rank + 1) < total) {
+			index_stack.push(2 * root_rank + 1);
+		}
+		if ((2 * root_rank) <= total) {
+			index_stack.push(2 * root_rank);
+		}
+	}
+	return;
 };
