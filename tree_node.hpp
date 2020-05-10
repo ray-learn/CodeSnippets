@@ -21,6 +21,8 @@ public:
 		return TripleLinearTree(capacity);	
 	}
 	bool AddTreeNode(T* node);
+	bool UpdateTreeNode(T* node, int rank);
+	T* GetTreeNode(int rank);
 	bool IsEmpty();
 	bool IsRoot(int rank);
 	bool IsLeaf(int rank);
@@ -66,3 +68,20 @@ bool TripleLinearTree<T>::AddTreeNode(T* node) {
 	total += 1;
 	return true;
 };
+
+template <typename T>
+T* TripleLinearTree<T>::GetTreeNode(int rank) {
+	if (rank > total) {
+		return nullptr;
+	}
+	return node_array[rank];
+}
+
+template <typename T>
+bool TripleLinearTree<T>::UpdateTreeNode(T* node, int rank) {
+	if (rank > total) {
+		return false;
+	}
+	node_array[rank] = node;
+	return true; 
+}
