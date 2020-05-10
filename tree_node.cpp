@@ -5,12 +5,13 @@
 using namespace std;
 
 int main() {
-	TripleTreeNode<string> node;
-	cout << "IsRoot: " << node.IsRoot() << endl;
-	cout << "IsLeaf: " << node.IsLeaf() << endl;
-
-	TripleLinearTree<string> tree;
-	cout << "IsNull: " << tree.IsNull() << endl;
+	int total_node = 10;
+	string node = "hello node";
+	TripleLinearTree<string> tree = TripleLinearTree<string>::InitTripleLinearTree(total_node);
+	cout << "IsEmpty: " << tree.IsEmpty() << endl;
+	cout << "IsRoot: " << tree.IsRoot(0) << endl;
+	cout << "GetHeight: " << tree.GetHeight(10) << endl;
+	cout << "AddTreeNode: " << tree.AddTreeNode(&node) << endl;
 	return 0;
 }
 		

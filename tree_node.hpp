@@ -1,48 +1,68 @@
 #include <vector>
+#include <cmath>
 
 using std::vector;
-
-template<typename T>
-class TripleTreeNode {
-private:
-	int height;
-	int depth;
-	TripleTreeNode<T>* parent;
-	TripleTreeNode<T>* left;
-	TripleTreeNode<T>* middle;
-	TripleTreeNode<T>* right;
-	T data;
-
-public:
-	TripleTreeNode(): parent{nullptr},left{nullptr},right{nullptr},middle{nullptr} {}
-	bool IsRoot();
-	bool IsLeaf();
-};
-
-template <typename T>
-bool TripleTreeNode<T>::IsRoot() {
-	return parent == nullptr; 
-}
-
-template <typename T>
-bool TripleTreeNode<T>::IsLeaf() {
-	return left == nullptr && middle == nullptr && right == nullptr;
-}
+using std::ceil;
 
 template<typename T>
 class TripleLinearTree {
-public:
+private:
 	int height;
 	int total;
-	vector<TripleTreeNode<T>*> node_array;
+	int capacity;
+	vector<T*> node_array;
 
-	TripleLinearTree() {
+	TripleLinearTree(int capacity) :capacity(capacity) {
+		node_array.reserve(capacity);
 	}
 
-	bool IsNull();
+public:
+	static TripleLinearTree InitTripleLinearTree(int capacity){
+		return TripleLinearTree(capacity);	
+	}
+	bool AddTreeNode(T* node);
+	bool IsEmpty();
+	bool IsRoot(int rank);
+	bool IsLeaf(int rank);
+	int GetHeight(int rank);
 };
 
 template <typename T>
-bool TripleLinearTree<T>::IsNull() {
-	return node_array.size() == 0;
+bool TripleLinearTree<T>::IsEmpty() {
+	return node_array.empty();
+};
+
+template <typename T>
+bool TripleLinearTree<T>::IsRoot(int rank) {
+	if (total == 0) {
+		return false;
+	}
+	if (rank == 0) {
+		return true;
+	}
+	return false;
+};
+
+template <typename T>
+bool TripleLinearTree<T>::IsLeaf(int rank) {
+	if (3 * rank > total) {
+		return true;
+	}
+	return false;
+};
+
+template <typename T>
+int TripleLinearTree<T>::GetHeight(int rank) {
+	return ceil(float(rank)/3);
+};
+
+template <typename T>
+bool TripleLinearTree<T>::AddTreeNode(T* node) {
+	if (total == capacity) {
+		capacity = 2 * capacity;
+		node_array.reserve(capacity);
+	}
+	node_array.push_back(node);
+	total += 1;
+	return true;
 };
