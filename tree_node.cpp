@@ -14,6 +14,7 @@ int main() {
 	string six_node = "hello 6";
 	string seven_node = "hello 7";
 	string eight_node = "hello 8";
+	string nine_node = "hello 9";
 	TripleLinearTree<string> tree = TripleLinearTree<string>::InitTripleLinearTree(capacity);
 	cout << "AddTreeNode(&root_node): " << tree.AddTreeNode(&root_node) << endl;
 	cout << "AddTreeNode(&second_node): " << tree.AddTreeNode(&second_node) << endl;
@@ -23,6 +24,11 @@ int main() {
 	cout << "AddTreeNode(&six_node): " << tree.AddTreeNode(&six_node) << endl;
 	cout << "AddTreeNode(&seven_node): " << tree.AddTreeNode(&seven_node) << endl;
 	cout << "AddTreeNode(&eight_node): " << tree.AddTreeNode(&eight_node) << endl;
+	cout << "AddTreeNode(&nine_node): " << tree.AddTreeNode(&nine_node) << endl;
 	tree.PreOrderTraverse(); 
+	cout << "~!@#$%^&*()_+" << endl;
+	tree.InOrderTraverse(); 
+	cout << "~!@#$%^&*()_+" << endl;
+	tree.PostOrderTraverse(); 
 	return 0;
 }

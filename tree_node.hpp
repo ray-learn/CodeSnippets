@@ -8,6 +8,9 @@ using std::vector;
 using std::stack;
 using std::ceil;
 
+const int ROOT_INDEX = 1;
+const int NULL_INDEX = -1;
+
 template<typename T>
 class TripleLinearTree {
 private:
@@ -119,13 +122,13 @@ void TripleLinearTree<T>::PreOrderTraverse() {
 	}
 
 	stack<int> index_stack;
-	index_stack.push(1);
+	index_stack.push(ROOT_INDEX);
 
 	while (!index_stack.empty()) {
 		int root_rank = index_stack.top();
 		index_stack.pop();
 		cout << "traversing index is: " << root_rank << endl;
-		if ((2 * root_rank + 1) < total) {
+		if ((2 * root_rank + 1) <= total) {
 			index_stack.push(2 * root_rank + 1);
 		}
 		if ((2 * root_rank) <= total) {
@@ -133,4 +136,62 @@ void TripleLinearTree<T>::PreOrderTraverse() {
 		}
 	}
 	return;
+};
+
+template <typename T>
+void TripleLinearTree<T>::InOrderTraverse() {
+	if (total == 0)
+		return;
+
+	int root_index = ROOT_INDEX;
+	stack<int> index_stack;
+	index_stack.push(ROOT_INDEX);
+
+	while (!index_stack.empty() || root_index != NULL_INDEX) {
+		if (root_index != NULL_INDEX)
+			while ((2 * root_index) <= total) {
+				index_stack.push(2 * root_index);
+				root_index = 2 * root_index;
+			}
+
+		int root_rank = index_stack.top();
+		index_stack.pop();
+		cout << "traversing index is: " << root_rank << endl;
+		if ((2 * root_rank) + 1 <= total) {
+			root_index = 2 * root_rank + 1;
+			index_stack.push(root_index);
+		} else {
+			root_index = NULL_INDEX;
+		}
+	}
+};
+
+template <typename T>
+void TripleLinearTree<T>::PostOrderTraverse() {
+	if (total == 0)
+		return;
+
+	int root_index = ROOT_INDEX;
+	int last_index;
+	stack<int> index_stack;
+	index_stack.push(ROOT_INDEX);
+
+	while (!index_stack.empty() || root_index != NULL_INDEX) {
+		if (root_index != NULL_INDEX)
+			while ((2 * root_index) <= total) {
+				index_stack.push(2*root_index);
+				root_index= 2 * root_index;
+			}
+
+		int root_rank = index_stack.top();
+		if ((( 2 * root_rank) + 1 <= total) && ((( 2 * root_rank) + 1) != last_index)) {
+			root_index = 2 * root_rank + 1;
+			index_stack.push(root_index);
+		} else {
+			index_stack.pop();
+			cout << "traversing index is: " << root_rank << endl;
+			root_index = NULL_INDEX;
+			last_index = root_rank;
+		}
+	}
 };
